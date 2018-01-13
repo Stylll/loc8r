@@ -50,9 +50,22 @@ module.exports.locationInfo = function(req,res){
         rating:3,
         address:'125 High street, Reading, RPG 16s',
         opening_hours:[
-            "Monday - Friday : 7:00pm - 7:00pm",
-            "Saturday : 8:00am - 5:00pm",
-            "Sunday : Closed"
+            {
+                days:"Monday-Friday",
+                opening:"7:00am",
+                closing:"7:00pm",
+                closed:false
+            },
+            {
+                days:"Saturday",
+                opening:"8:00am",
+                closing:"5:00pm",
+                closed:false
+            },
+            {
+                days:"Sunday",
+                closed:true
+            }
         ],
         facilities:['Hot drinks','Food','Premium Wifi'],
         reviews:[
@@ -83,3 +96,66 @@ module.exports.locationInfo = function(req,res){
 module.exports.addReview = function(req,res){
     res.render('location-review-form',{title:'Review'});
 };
+
+/*
+db.locations.save(
+{
+    name:"Worldmart",
+    address:"125 High street, Reading, RPG 16s",
+    rating:3,
+    facilities:['Hot drinks','Food','Parking Space'],
+    coords:[-0.9693284,51.453441],
+    openingHours:[
+            {
+                days:"Monday-Friday",
+                opening:"6:00am",
+                closing:"9:00pm",
+                closed:false
+            },
+            {
+                days:"Saturday",
+                opening:"8:00am",
+                closing:"5:00pm",
+                closed:false
+            },
+            {
+                days:"Sunday",
+                closed:true
+            }],
+    reviews:[]
+});
+
+
+db.locations.update({name:"Worldmart"},{
+    $push:{
+        reviews:{
+            id: ObjectId(),
+            rating:"5",
+            customer:"Andrew Higgins",
+            date:new Date("July 10, 2018"),
+            comment:"It was a very bad experience for me."
+        }
+
+    }
+})
+
+db.locations.update({name:"Worldmart"},{
+    $push:{
+        reviews:{
+            id: ObjectId(),
+            rating:"5",
+            customer:"Andrew Frack",
+            date:new Date("July 10, 2018"),
+            comment:"It was a fair experience."
+        }
+
+    }
+})
+
+*/
+
+
+
+
+
+
