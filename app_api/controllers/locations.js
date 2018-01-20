@@ -1,10 +1,6 @@
 //controller for locations route in the api
 
-var mongoose = require('mongoose');
-//set promise for mongoose
-mongoose.Promise = require('bluebird');
-
-var locationModel = mongoose.model("Location");
+var locationModel =require("../models/locations");
 
 
 sendJsonResponse = function(res,status,message){
@@ -22,20 +18,9 @@ module.exports.locationsCreate = function(req,res){
 
 module.exports.locationsReadOne = function(req,res){
     if(req.params && req.params.locationid){
-        console.log("opening controller...");
-        console.log(req.params.locationid);
-        console.log(locationModel);
 
-        let query = locationModel.findOne({ "name":"Starcups" });
-        console.log(query);
-        query.exec((err,res) => {
-            console.log(res);
-        });
-        console.log("called query");
-            locationModel.findOne({ "name":"Starcups" }).exec((err,location) => {
+        locationModel.findById(req.params.locationid).exec(function(err,location){
             console.log("finding...");
-            console.log(err);
-            console.log(location);
             if(err){
                 res.status(404);
                 res.json(err);
@@ -45,30 +30,10 @@ module.exports.locationsReadOne = function(req,res){
             }
             else{
                 console.log("found...");
-                res.status(200);
-                res.json(location);
+                sendJsonResponse(res,200,location);
             }
             console.log("end...");
         });
-
-        // locationModel.findById(req.params.locationid).exec(function(err,location){
-        //     console.log("finding...");
-        //     console.log(err);
-        //     console.log(location);
-        //     if(err){
-        //         res.status(404);
-        //         res.json(err);
-        //     }
-        //     else if(!location){
-        //         sendJsonResponse(res,404,{'message':'Location id not found'});
-        //     }
-        //     else{
-        //         console.log("found...");
-        //         res.status(200);
-        //         res.json(location);
-        //     }
-        //     console.log("end...");
-        // });
 
     }
     else{

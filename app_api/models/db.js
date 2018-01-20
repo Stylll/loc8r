@@ -1,19 +1,13 @@
 
 var mongoose = require('mongoose');
 var readline = require('readline');
+var Connection = require('./connection');
 
-//set dburi depending on whether app is in production or development server
-var dbURI = "mongodb://localhost:27017/loc8r"
+mongoose.set('debug',true);
 
-if(process.env.NODE_ENV === "production"){
-    dbURI = process.env.MONGOLAB_URI; //MONGOLAB_URI is a node environmental variable that has been set
-}
+var dbURI = Connection.dbURI;
 
-//set promise for mongoose
-mongoose.Promise = require('bluebird');
-
-//create connection
-var Conn1 = mongoose.createConnection(dbURI);
+var Conn1 = Connection.Connection1;
 
 //monitor database connection
 Conn1.on('connected',function(){
@@ -82,11 +76,6 @@ process.on('SIGTERM',function(){
         process.exit(0);
     });
 });
-
-
-//importing the schema
-require("./locations");
-
 
 
 

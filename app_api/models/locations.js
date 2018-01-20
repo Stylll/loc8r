@@ -1,6 +1,8 @@
 //schema definition for locations
 var mongoose = require('mongoose');
+var connection = require('./connection');
 
+var Conn1 = connection.Connection1;
 
 //opening hours schema
 var openingHourSchema = new mongoose.Schema({
@@ -20,7 +22,7 @@ var reviewSchema = new mongoose.Schema({
 
 //location schema
 var locationSchema = new mongoose.Schema({
-    _id:{type:String},
+    //_id:{type:String},
     name:{type:String,required:true},
     address:String,
     rating:{type:Number,"default":0,min:0,max:5},
@@ -31,6 +33,10 @@ var locationSchema = new mongoose.Schema({
 });
 
 //create a model using the schema built
-mongoose.model('Location',locationSchema,'locations');
+var Location = Conn1.model('Location',locationSchema,'locations');
+
+
+module.exports = Location;
+
 
 
