@@ -20,6 +20,7 @@ var reviewSchema = new mongoose.Schema({
 
 //location schema
 var locationSchema = new mongoose.Schema({
+    _id:{type:String},
     name:{type:String,required:true},
     address:String,
     rating:{type:Number,"default":0,min:0,max:5},
