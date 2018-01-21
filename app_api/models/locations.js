@@ -14,6 +14,7 @@ var openingHourSchema = new mongoose.Schema({
 
 //reviews schema
 var reviewSchema = new mongoose.Schema({
+    //_id : String,
     rating:{type:Number,required:true,min:0,max:5},
     customer:{type:String, required:true},
     date:{type:Date, "default":Date.now},
@@ -30,6 +31,8 @@ var locationSchema = new mongoose.Schema({
     coords:{type:[Number],index:"2dsphere"},
     openingHours:[openingHourSchema],
     reviews:[reviewSchema]
+},{
+    usePushEach:true
 });
 
 //create a model using the schema built
