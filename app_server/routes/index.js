@@ -7,7 +7,7 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', ctrlLocations.homelist);
 //GET location info page
-router.get('/location',ctrlLocations.locationInfo);
+router.get('/location/:locationid',ctrlLocations.locationInfo);
 //GET add review page
 router.get('/location/review/new',ctrlLocations.addReview);
 

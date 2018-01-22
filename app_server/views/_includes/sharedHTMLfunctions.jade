@@ -6,4 +6,14 @@ mixin displayRating(rating)
     - for(var i = rating; i < 5; i++)      
         span.glyphicon.glyphicon-star-empty
 
+//mixin to format date
+mixin formatDate(dateString)
+    - let newdate = new Date(dateString)
+    - let months = ['January','February','March','April','May','June','July','August','September','October','November','December']
+    - let d = newdate.getDate()
+    - let m = months[newdate.getMonth()]
+    - let y = newdate.getFullYear()
+    - let output = d+" "+m+" "+y
+    =output
+
 

@@ -53,7 +53,8 @@ block content
                       span.rating
                         +displayRating(review.rating)
                       span.reviewAuthor= review.customer
-                      small.reviewTimestamp= review.date
+                      small.reviewTimestamp
+                        +formatDate(review.date)
                     .col-xs-12
                       p= review.comment
                 

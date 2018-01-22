@@ -1,3 +1,10 @@
+/**
+ * module to specify connection string and 
+ * connect mongoose to mongo
+ * set dbURI
+ * export connection and dbURI
+ */
+
 var mongoose = require('mongoose');
 //set promise for mongoose
 //mongoose.Promise = global.Promise;

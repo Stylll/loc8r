@@ -7,7 +7,7 @@ var theEarth = (function(){
     const earthRadius = 6371; //km, miles is 3959
 
     var getDistanceFromRadius = function(rad){
-        return parseFloat(rad * earthRadius) + "km";
+        return parseFloat(rad * earthRadius);
     };
     var getRadiusFromDistance = function(dist){
         return parseFloat(dist / earthRadius);
@@ -95,7 +95,7 @@ module.exports.locationsListByDistance = function(req,res){
     var lat = parseFloat(req.query.lat);
     var num = parseInt(req.query.num || 10);
 
-    if(!lng || !lat){
+    if(!lng && lng !== 0 || !lat && lat !== 0){
         sendJsonResponse(res,404,{'message':'lng and lat are required'});
             return;
     }
