@@ -193,7 +193,56 @@ module.exports.reviewsUpdateOne = function(req,res){
 } 
 
 module.exports.reviewsDeleteOne = function(req,res){
-    sendJsonResponse(res,200,{'status':'Success'});
+    /*
+    Review controller to handle deletion
+    */
+    if(req.params && req.params.locationid && req.params.reviewid){
+        locationModel.findById(req.params.locationid)
+        .exec((err,location) => {
+            if(err){
+                sendJsonResponse(res,404,err);
+                return;
+            }
+            else if(!location){
+                sendJsonResponse(res,404,{'message':'location not found'});
+                return;
+            }
+            else{
+                if(location.reviews && location.reviews.length > 0){
+                    /**
+                     * Check if the review exists and delete it
+                     * Save the location
+                     * Update the averagerating
+                     */
+                    if(location.reviews.id(req.params.reviewid)){
+                        location.reviews.id(req.params.reviewid).remove();
+
+                        location.save((err,location) => {
+                            if(err){
+                                sendJsonResponse(res,404,err);
+                            }
+                            else{
+                                updateAverageRating(location._id);
+                                sendJsonResponse(res,204,null);
+                            }
+                        });
+                    }
+                    else{
+                        sendJsonResponse(res,404,{'message':'review not found'});
+                        return;
+                    }
+                    
+                }
+                else{
+                    sendJsonResponse(res,404,{'message':'no reviews found'});
+                    return;
+                }
+            }
+        });
+    }
+    else{
+        sendJsonResponse(res,404,{'message':'location id and review is required'});
+    }
 } 
 
 

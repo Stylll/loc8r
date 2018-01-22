@@ -205,7 +205,22 @@ module.exports.locationsUpdateOne = function(req,res){
 } 
 
 module.exports.locationsDeleteOne = function(req,res){
-    sendJsonResponse(res,200,{'status':'Success'});
+    /*location controller for handling delete
+        */
+    if(req.params && req.params.locationid){
+        locationModel.findByIdAndRemove(req.params.locationid)
+        .exec((err,location) => {
+            if(err){
+                sendJsonResponse(res,404,err);
+            }
+            else{
+                sendJsonResponse(res,204,{'message':'location deleted'});
+            }
+        });
+    }
+    else{
+        sendJsonResponse(res,404,{'message':'location id is required'});
+    }
 } 
 
 
