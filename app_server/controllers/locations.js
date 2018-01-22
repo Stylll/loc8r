@@ -1,3 +1,11 @@
+/**
+ * Controller handler for locations
+ * Require request for requesting data from the api
+ * Parameters: req request param 
+ * Parameters: res result or return param
+ */
+var request = require('request');
+
 
 //GET 'Home' page
 module.exports.homelist = function(req,res){
