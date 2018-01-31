@@ -11,7 +11,7 @@ var addReview = (res,req,location) => {
     location.save((err,location) => {
         if(err){
             console.log("getting error:", err);
-            sendJsonResponse(res,404,err);
+            sendJsonResponse(res,400,err);
             return;
         }
         else if(!location){

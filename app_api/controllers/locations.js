@@ -147,6 +147,9 @@ module.exports.locationsCreate = function(req,res){
     });
 } 
 
+/**
+ * method to get only one location details from the db 
+ */
 module.exports.locationsReadOne = function(req,res){
     if(req.params && req.params.locationid){
 

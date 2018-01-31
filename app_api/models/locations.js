@@ -18,7 +18,7 @@ var reviewSchema = new mongoose.Schema({
     rating:{type:Number,required:true,min:0,max:5},
     customer:{type:String, required:true},
     date:{type:Date, "default":Date.now},
-    comment:String
+    comment:{type:String,required:true}
 })
 
 //location schema
